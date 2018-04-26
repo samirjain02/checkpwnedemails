@@ -112,7 +112,7 @@ def tab_delimited_string(data):
 	if data[DATAINDEX]:
 		for bp in data[DATAINDEX]:  # bp stands for breaches/pastbins
 			d = bp
-			
+
 			try:
 				flat_data_classes = [str(x) for x in d[DATACLASSES]]
 				d[DATACLASSES]    = flat_data_classes
@@ -120,7 +120,7 @@ def tab_delimited_string(data):
 				pass  #  Not processing a string for a breach.
 
 			flat_d = clean_and_encode(d.values())
-			output_list.append(begining_sub_str + '\t' + "\t".join(flat_d))
+			output_list.append(begining_sub_str)
 	else:
 		output_list.append(begining_sub_str)
 
@@ -130,11 +130,6 @@ def write_results_to_file(filename, results, opts):
 	BREACHESTXT = "_breaches.txt"
 	PASTESTXT   = "_pastes.txt"
 	files = []
-
-	file_headers = {
-			BREACHESTXT: "Email Address\tIs Pwned\tPwn Count\tDomain\tName\tTitle\tData Classes\tLogo Type\tBreach Date\tAdded Date\tIs Verified\tDescription",
-			PASTESTXT:   "Email Address\tIs Pwned\tDate\tSource\tEmail Count\tID\tTitle",
-	}
 
 	if opts.only_breaches:
 		files.append(BREACHESTXT)
@@ -149,8 +144,6 @@ def write_results_to_file(filename, results, opts):
 
 	for res, f in zip(results, files):
 		outfile = open(filename + f, 'w')
-
-		outfile.write(file_headers[f] + '\n')
 
         	for r in res:
 			outfile.write(tab_delimited_string(r) + '\n')
