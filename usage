@@ -1,0 +1,1 @@
+python checkpwnedemails.py -i /Users/work/desktop/haveibeenpawned/sample.txt -o /Users/work/desktop/haveibeenpawned/output.txt
